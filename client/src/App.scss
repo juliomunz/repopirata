@@ -1,0 +1,52 @@
+.container-login {
+    display: flex;
+    justify-content: center;
+    // flex-direction: column;
+    width: 100%;
+}
+
+.container-registro {
+    display: flex;
+    justify-content: center;
+    // flex-direction: column;
+    width: 100%;
+}
+
+.pirates-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .card {
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      border-radius: 5px;
+      width: 100%;
+      margin-bottom: 9px;
+      padding: 9px;
+      font-size: 20px;
+      justify-content: center;
+    }
+}
+
+.container-back {
+    display: flex;
+    justify-content: space-around
+}
+
+p {
+    text-align: center;
+}
+
+.acctions-container{
+    display: flex;
+    justify-content: center;
+}
+
+li {
+    text-decoration: none;
+    list-style: none;
+    }
+
+.header-pirates {
+    display: flex;
+    justify-content: space-around
+}
