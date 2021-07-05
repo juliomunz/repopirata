@@ -22,17 +22,17 @@ const PiratesSchema = new mongoose.Schema({
     }, 
     pierna: {
         type: Boolean,
-        default: false
+        default: true
         // required: [true, 'Este es un campo requerido'],
     },   
     ojo: {
         type: Boolean,
-        default: false
+        default: true
         // required: [true, 'Este es un campo requerido'],
     },   
     brazo: {
         type: Boolean,
-        default: false
+        default: true
         // required: [true, 'Este es un campo requerido'],
     }, 
 },

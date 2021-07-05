@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState,useEffect,useRef } from "react";
 import Swal from 'sweetalert2'
 
 
@@ -17,6 +17,30 @@ export default function Login () {
     const [contrasena, setContrasena]= useState('')
     const history = useHistory();
     const [error, setError]= useState('')
+    const [iguales,setIguales]=useState(true);
+    let redstyle={color:'red'};
+
+    const [errors, setErrors] = useState({
+        firstNameE: "",
+        lastNameE: "",
+        emailE: "",
+        passwordE: "",
+        confirmPasswordE: "",
+        match: false
+      });
+
+      const [form,setForm] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+
+      const passwordRef=useRef(null);
+      const cPasswordRef=useRef(null);
+    
+
 
     const registrar = async(e) =>{
         e.preventDefault()
@@ -55,6 +79,74 @@ export default function Login () {
         } //console.log(respuesta)
     }
 
+    const onChange = (e) => {
+        setForm({
+          ...form,
+          [e.target.name]: e.target.value,
+        });
+        const { firstName, lastName, email, password, confirmPassword } = form;
+    
+        
+    
+        if(e.target.name==='firstName' && e.target.value.length<2){
+            setErrors({
+                ...errors,
+                firstNameE: "Nombre tiene menos de 2 caracteres",
+              });
+        }
+        if(e.target.name==='firstName' && (e.target.value.length>=2||e.target.value.length===0)){
+            setErrors({
+                ...errors,
+                firstNameE: "",
+              });
+        }
+        
+        if(e.target.name==='lastName' && e.target.value.length<2){
+            setErrors({
+                ...errors,
+                lastNameE: "Apellido tiene menos de 2 caracteres",
+              });
+        }
+        if(e.target.name==='lastName' && (e.target.value.length>=2||e.target.value.length===0)){
+            setErrors({
+                ...errors,
+                lastNameE: "",
+              });
+        }
+    
+        if(e.target.name==='email' && e.target.value.length<5){
+            setErrors({
+                ...errors,
+                emailE: "Email tiene menos de 5 caracteres",
+              });
+        }
+        if(e.target.name==='email' && (e.target.value.length>=5||e.target.value.length===0)){
+            setErrors({
+                ...errors,
+                emailE: "",
+              });
+        }
+    
+        if(e.target.name==='password' && e.target.value.length<8){
+            setErrors({
+                ...errors,
+                passwordE: "Contraseña debe tener al menos 8 caracteres",
+              });
+        }
+        if(e.target.name==='password' && (e.target.value.length>=8||e.target.value.length===0)){
+            setErrors({
+                ...errors,
+                passwordE: "",
+              });
+              
+              }
+    
+        const valp=passwordRef.current.value;
+        const valcp=cPasswordRef.current.value;
+    
+        setIguales(valp===valcp);
+    
+      };
     
 
     return (
@@ -71,6 +163,7 @@ export default function Login () {
                                         <Form.Label column lg={6}>Firts Name:</Form.Label>
                                         <Col>
                                         <Form.Control type="text" required onChange={(e)=>setNombre(e.target.value)}/>
+                                        <p style={redstyle}> {errors.firstNameE} </p>
                                         </Col>
                                     </Row>
                                         <br />
@@ -80,6 +173,7 @@ export default function Login () {
                                         <Form.Label column lg={6}>Last Name:</Form.Label>
                                         <Col>
                                         <Form.Control type="text" required onChange={(e)=>setApellido(e.target.value)}/>
+                                        <p style={redstyle}> {errors.lastNameE} </p>
                                         </Col>
                                     </Row>
                                         <br />
@@ -89,6 +183,7 @@ export default function Login () {
                                         <Form.Label column lg={6}>Email:</Form.Label>
                                         <Col>
                                         <Form.Control type="email" required onChange={(e)=>setCorreo(e.target.value)}/>
+                                        <p style={redstyle}> {errors.emailE} </p>
                                         </Col>
                                     </Row>
                                         <br />
@@ -97,7 +192,8 @@ export default function Login () {
                                     <Row>
                                         <Form.Label column lg={6}>Password:</Form.Label>
                                         <Col>
-                                        <Form.Control type="password" required onChange={(e)=>setContrasena(e.target.value)}/>
+                                        <Form.Control type="password" required onChange={(e)=>setContrasena(e.target.value)} ref={passwordRef}/>
+                                        <p style={redstyle}> {errors.passwordE} </p>
                                         </Col>
                                     </Row>
                                         <br />
@@ -106,7 +202,8 @@ export default function Login () {
                                     <Row>
                                         <Form.Label column lg={6}>Confirm Password:</Form.Label>
                                         <Col>
-                                        <Form.Control type="password" required onChange={(e)=>setContrasena(e.target.value)}/>
+                                        <Form.Control type="password" required onChange={(e)=>setContrasena(e.target.value)} ref={cPasswordRef}/>
+                                        <p style={redstyle}> {iguales ? '' : 'Las contraseñas deben ser iguales'} </p>
                                         </Col>
                                     </Row>
                                         <br />

@@ -6,7 +6,6 @@ export default class PiratesService {
 
     async getOneSinglePirate (id){
         try {
-            //console.log(id)
             const pirate = await axios.get(`http://localhost:8000/api/pirates/${id}`);
             return pirate.data.pirateData;
         } catch (err) {

@@ -52,7 +52,7 @@ return(
                                     <li key={pirate._id} className="card">
                                         <p>{pirate.name}</p>
                                         <div className="acctions-container">
-                                            <Link to={`/pirate/${pirate._id}`}>
+                                            <Link to={`/pirates/${pirate._id}`}>
                                                 <Button variant="primary">View Pirate</Button>
                                             </Link>
                                                 <Button variant="danger" onClick={() => deletePirate(pirate._id)}>Walk the Plank</Button>

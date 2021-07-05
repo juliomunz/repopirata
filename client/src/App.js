@@ -7,7 +7,8 @@ import {
 
 import Login from './views/Login';
 import Pirates from './views/Pirates';
-import CreatePirate from './views/CreatePirate'
+import CreatePirate from './views/CreatePirate';
+import ViewPirate from './views/ViewPirate';
 
 
 function App() {
@@ -15,9 +16,9 @@ function App() {
     <div className="container">
       <Router>
           <Switch>
-          {/* <Route exact path="/pirate/:id">
-              <DetailPirates/>
-          </Route> */}
+          <Route exact path="/pirates/:id">
+              <ViewPirate/>
+          </Route>
           <Route exact path="/pirate/new">
             <CreatePirate/>
           </Route>
